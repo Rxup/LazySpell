@@ -1,0 +1,26 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="localization_combatlog.lua"/>
+	<Script file="Localization.lua"/>
+	<Script file="RuWoW.lua"/>
+	<Frame name="RuWoW" parent="UIParent">
+		<Scripts>
+			<OnLoad>
+				RuWoW_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				RuWoW_OnEvent(event);
+			</OnEvent>
+			<OnUpdate>
+				RUWOW_OnUpdate();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="GameTooltip" parent="GameTooltip" hidden="false">
+		<Scripts>
+			<OnUpdate>
+				RUWOW_GameTooltip_OnUpdate();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

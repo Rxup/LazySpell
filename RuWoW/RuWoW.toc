@@ -1,0 +1,5 @@
+## Interface: 11200
+## RequiredDeps: ProffBot
+## SavedVariables: RUWOW_EnableQuests, RUWOW_EnableSpells, RUWOW_EnableBooks, RUWOW_EnableCreatures, RUWOW_EnableNPCs, RUWOW_EnableInterface, RUWOW_EnableCombatLog
+Translates.xml
+RuWoW.xml
