@@ -41,9 +41,15 @@ LazySpell:RegisterChatCommand({"/ls"}, {
 SLASH_LSC1 = "/lscast"
 SlashCmdList["LSC"] = function(spell)
 	local s,r = LazySpell:ExtractSpell(spell)
-	if s and HealComm.Spells[s] and r == 1 and UnitName("target") ~= nil then
+	if s and HealComm.Spells[s] and UnitName("target") ~= nil then
 		local rank = LazySpell:CalculateRank(s, "target")
-		LazySpell:Debug("CalculateRank "..rank)
+		if r ~= nil and rank > r then
+			LazySpell:Debug("CalculateRank "..rank.. " cap "..r)
+			rank = r
+		else
+			LazySpell:Debug("CalculateRank "..rank)
+		end
+		
 		spell = s.."(Rank "..rank..")"
 	end	
 	CastSpellByName(spell);
