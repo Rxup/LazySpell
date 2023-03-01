@@ -58,8 +58,7 @@
 	
 	-- equip and set bonus prefixes:
 	BONUSSCANNER_PREFIX_EQUIP = "Если надето: "
-	BONUSSCANNER_PREFIX_SET = "Комплект ("
-	BONUSSCANNER_PREFIX_SET_ENDING = " предмета):"
+	BONUSSCANNER_PREFIX_SET = "Поставить: "
 	
 	-- passive bonus patterns. checked against lines which start with above prefixes
 	BONUSSCANNER_PATTERNS_PASSIVE = {

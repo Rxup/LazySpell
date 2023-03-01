@@ -323,9 +323,6 @@ function BonusScanner:ScanLine(line)
 		and not BonusScanner.temp.sets[BonusScanner.temp.set]) then
 
 		tmpStr = string.sub(line, string.len(BONUSSCANNER_PREFIX_SET) + 1)
-		if BONUSSCANNER_PREFIX_SET_ENDING ~= "" and string.sub(tmpStr, 2, string.len(BONUSSCANNER_PREFIX_SET_ENDING) + 1) == BONUSSCANNER_PREFIX_SET_ENDING then
-			tmpStr = string.sub(tmpStr, string.len(BONUSSCANNER_PREFIX_SET_ENDING) + 3)
-		end
 
 		BonusScanner.temp.slot = "Set"
 		BonusScanner:CheckPassive(tmpStr)
