@@ -2558,6 +2558,7 @@ RAID_INFO = "Информация";
 RAID_INFORMATION = "Информация";
 RAID_INFO_DESC = "Зоны-инстансы, которые сохранены для вас.";
 RAID_INSTANCE_INFO_HDR = "Время до обновления рейдовой зоны:";
+--[[
 RAID_INSTANCE_WARNING_HOURS = "ВНИМАНИЕ! Зона \"%s\" будет обновлена через %d ч.";
 RAID_INSTANCE_WARNING_HOURS_P1 = "ВНИМАНИЕ! Зона \"%s\" будет обновлена через %d ч.";
 RAID_INSTANCE_WARNING_MIN = "ВНИМАНИЕ! Рейдовая зона \"%s\" будет обновлена через %d мин.!";
@@ -2565,6 +2566,7 @@ RAID_INSTANCE_WARNING_MIN_P1 = "ВНИМАНИЕ! Рейдовая зона \"%s
 RAID_INSTANCE_WARNING_MIN_SOON_P1 = "ВНИМАНИЕ! Зона \"%s\" будет обновлена через %d м. Покиньте зону, иначе сработает камень возвращения!";
 RAID_INSTANCE_WARNING_MIN_SOON = "ВНИМАНИЕ! Зона \"%s\" будет обновлена через %d м. Покиньте зону, иначе сработает камень возвращения!";
 RAID_INSTANCE_WELCOME = "Добро пожаловать! Обновление рейдовой зоны \"%s\" состоится через %s.";
+]]
 RAID_LEADER_TOKEN = "(Л)"; -- Token used to denote a raid leader
 RAID_MEMBERS_AFK = "Следующие игроки отсутствуют: %s.";
 RAID_MEMBER_NOT_READY = "%s не подтверждает готовность.";
