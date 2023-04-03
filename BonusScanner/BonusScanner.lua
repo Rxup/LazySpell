@@ -218,7 +218,7 @@ end
 function BonusScanner:ScanEquipment()
 	local slotid, slotname, hasItem, i;
 
-	BonusScannerTooltip2:SetOwner(UIParent, "ANCHOR_NONE");
+	BonusScannerTooltip:SetOwner(UIParent, "ANCHOR_NONE");
 
     BonusScanner:Debug("Scanning Equipment has requested");
 
@@ -229,7 +229,7 @@ function BonusScanner:ScanEquipment()
 
 	for i, slotname in BonusScanner.slots do
 		slotid, _ = GetInventorySlotInfo(slotname.. "Slot");
-		hasItem = BonusScannerTooltip2:SetInventoryItem("player", slotid);
+		hasItem = BonusScannerTooltip:SetInventoryItem("player", slotid);
 	
 		if ( hasItem ) then
 			BonusScanner.temp.slot = slotname;
@@ -251,8 +251,8 @@ function BonusScanner:ScanItem(itemlink)
 		BonusScanner.temp.sets = {};
 		BonusScanner.temp.set = "";
 		BonusScanner.temp.slot = "";
-		BonusScannerTooltip2:ClearLines();
-		BonusScannerTooltip2:SetHyperlink(itemlink);
+		BonusScannerTooltip:ClearLines();
+		BonusScannerTooltip:SetHyperlink(itemlink);
 		BonusScanner:ScanTooltip();
 		return BonusScanner.temp.bonuses;
 	end
@@ -261,10 +261,10 @@ end
 
 function BonusScanner:ScanTooltip()
 	local tmpTxt, line;
-	local lines = BonusScannerTooltip2:NumLines();
+	local lines = BonusScannerTooltip:NumLines();
 
 	for i=2, lines, 1 do
-		tmpText = getglobal("BonusScannerTooltip2TextLeft"..i);
+		tmpText = getglobal("BonusScannerTooltipTextLeft"..i);
 		val = nil;
 		if (tmpText:GetText()) then
 			line = tmpText:GetText();
@@ -313,21 +313,21 @@ function BonusScanner:ScanLine(line)
 	local tmpStr, found;
 	-- Check for "Equip: "
 	if(string.sub(line,0,string.len(BONUSSCANNER_PREFIX_EQUIP)) == BONUSSCANNER_PREFIX_EQUIP) then
-
+		--BonusScanner:Debug("BONUSSCANNER_PREFIX_EQUIP: \"" .. line .. "\"");
 		tmpStr = string.sub(line,string.len(BONUSSCANNER_PREFIX_EQUIP)+1);
 		BonusScanner:CheckPassive(tmpStr);
 
 	-- Check for "Set: "
-	elseif(string.sub(line, 0, string.len(BONUSSCANNER_PREFIX_SET)) == BONUSSCANNER_PREFIX_SET
-		and BonusScanner.temp.set ~= "" 
-		and not BonusScanner.temp.sets[BonusScanner.temp.set]) then
+	elseif(string.sub(line,0,string.len(BONUSSCANNER_PREFIX_SET)) == BONUSSCANNER_PREFIX_SET
+			and BonusScanner.temp.set ~= "" 
+			and not BonusScanner.temp.sets[BonusScanner.temp.set]) then
 
-		tmpStr = string.sub(line, string.len(BONUSSCANNER_PREFIX_SET) + 1)
+		tmpStr = string.sub(line,string.len(BONUSSCANNER_PREFIX_SET)+1);
+		BonusScanner:Debug("Check SET: \"" .. tmpStr .. "\"");
+		BonusScanner.temp.slot = "Set";
+		BonusScanner:CheckPassive(tmpStr);
 
-		BonusScanner.temp.slot = "Set"
-		BonusScanner:CheckPassive(tmpStr)
-
-		-- any other line (standard stats, enchantment, set name, etc.)
+	-- any other line (standard stats, enchantment, set name, etc.)
 	else
 		-- Check for set name
 		_, _, tmpStr = string.find(line, BONUSSCANNER_PATTERN_SETNAME);

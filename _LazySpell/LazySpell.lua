@@ -7,6 +7,7 @@ LazySpell.cast = {}
 
 LazySpell.BOL = {
 ["enUS"] = "Receives up to (%d+) extra healing from Holy Light spells%, and up to (%d+) extra healing from Flash of Light spells%.",
+["ruRU"] = "Receives up to (%d+) extra healing from Holy Light spells%, and up to (%d+) extra healing from Flash of Light spells%.",
 ["deDE"] = "Erh�lt bis zu (%d+) extra Heilung durch %'Heiliges Licht%' und bis zu (%d+) extra Heilung durch den Zauber %'Lichtblitz%'%.",
 ["frFR"] = "Les sorts de Lumiere sacr�e rendent jusqu%'a (%d+) points de vie suppl�mentaires%, les sorts d%'Eclair lumineux jusqu%'a (%d+)%."
 }
@@ -41,7 +42,7 @@ LazySpell:RegisterChatCommand({"/ls"}, {
 SLASH_LSC1 = "/lscast"
 SlashCmdList["LSC"] = function(spell)
 	local s,r = LazySpell:ExtractSpell(spell)
-	if s and HealComm.Spells[s] and UnitName("target") ~= nil then
+	if s and HealComm.Spells[s] and UnitExists("target") then
 		local rank = LazySpell:CalculateRank(s, "target")
 		if r ~= nil and rank > r then
 			LazySpell:Debug("CalculateRank "..rank.. " cap "..r)
@@ -51,6 +52,8 @@ SlashCmdList["LSC"] = function(spell)
 		end
 		
 		spell = s.."(Rank "..rank..")"
+	else
+		spell = s.."(Rank 1)"
 	end	
 	CastSpellByName(spell);
 end
@@ -129,7 +132,9 @@ function LazySpell:GetUnitSpellPower(spell, unit)
 		end
 		local buffName = healcommTipTextLeft1:GetText()
 		if (buffTexture == "Interface\\Icons\\Spell_Holy_PrayerOfHealing02" or buffTexture == "Interface\\Icons\\Spell_Holy_GreaterBlessingofLight") then
-			local _,_, HLBonus, FoLBonus = string.find(healcommTipTextLeft2:GetText(),LazySpell.BOL[GetLocale()])
+			local t1 = healcommTipTextLeft2:GetText() or ""
+			local t2 = LazySpell.BOL[GetLocale()] or ""
+			local _,_, HLBonus, FoLBonus = string.find(t1,t2)
 			HLBonus = HLBonus or 0
 			FoLBonus = FoLBonus or 0
 			if (spell == L["Flash of Light"]) then
