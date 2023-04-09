@@ -224,6 +224,10 @@ function LazySpell:CalculateRank(spell, unit)
 	return result
 end
 
+function LazySpell:IsHealComm(s)
+	return HealComm.Spells[s]
+end
+
 function LazySpell:Clique_CastSpell(spell, unit)
 	local s,r = LazySpell:ExtractSpell(spell)
 	unit = unit or Clique.unit
