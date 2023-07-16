@@ -88,12 +88,13 @@ function LazySpell:ExtractSpell(spell)
 		s = string.sub( s, 1, -3 )
 	end
 	_, _, s = string.find(s, "^%s*(.*)$")
-	_, _, i, r = string.find(s, "(.*)%(.*(%d+)%)$")
+	i, r = string.match(s, "(.*) %(.* (%d+)%)$")
 	if (i and r) then
 		s = i
 		r = tonumber(r)
 		return s, r
 	end
+	return s, 1
 end
 
 function LazySpell:GetBuffSpellPower()
